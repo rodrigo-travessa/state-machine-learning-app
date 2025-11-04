@@ -1,19 +1,19 @@
 extends State
 class_name EnemyIdle
 
-@export var enemy: CharacterBody2D
+@export var Parent: CharacterBody2D
 @export var move_speed: float = 10.0
 
 var move_direction: Vector2
 var wander_time: float
+var player : CharacterBody2D
 
 func randomize_wander():
-	print('randomize Called')
 	move_direction = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
 	wander_time = randf_range(1,4)
 
 func Enter():
-	print('Enter Called')
+	player = get_tree().get_first_node_in_group("player")
 	randomize_wander()
 
 func Update(delta:float):
@@ -23,5 +23,9 @@ func Update(delta:float):
 		randomize_wander()
 
 func Physics_Update(delta: float):
-	if enemy:
-		enemy.velocity = move_direction * move_speed
+	var direction = player.global_position - Parent.global_position	
+	if direction.length() < 200:
+		TransitionTo.emit(self, "follow")
+		return
+	if Parent:
+		Parent.velocity = move_direction * move_speed

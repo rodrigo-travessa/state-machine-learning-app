@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dso0atiwcfaqy"]
+[gd_scene load_steps=7 format=3 uid="uid://dso0atiwcfaqy"]
 
 [ext_resource type="Script" uid="uid://c0j6rdqdnsxg1" path="res://Scenes/Enemy/enemy.gd" id="1_dmwl5"]
 [ext_resource type="Texture2D" uid="uid://ky5jw4ji2jjw" path="res://Scenes/Enemy/enemy_medium.png" id="1_mw074"]
 [ext_resource type="Script" uid="uid://dayw0phcjkib3" path="res://Scenes/Enemy/state_machine.gd" id="2_nvvbs"]
 [ext_resource type="Script" uid="uid://bkdkhn3anxhxh" path="res://Scenes/Enemy/EnemyIdle.gd" id="3_2t2r4"]
+[ext_resource type="Script" uid="uid://bnugdwfn1nybv" path="res://Scenes/Enemy/EnemyFollow.gd" id="5_d40jh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xjnqo"]
 radius = 7.0
 height = 20.0
 
 [node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+platform_on_leave = 2
 script = ExtResource("1_dmwl5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,12 +24,17 @@ texture = ExtResource("1_mw074")
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_xjnqo")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("Parent", "initial_state")]
 script = ExtResource("2_nvvbs")
-initial_state = NodePath("EnemyIdle")
+Parent = NodePath("..")
+initial_state = NodePath("Follow")
 
-[node name="EnemyIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_2t2r4")
-enemy = NodePath("../..")
 move_speed = 25.0
 metadata/_custom_type_script = "uid://bkdkhn3anxhxh"
+
+[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("Parent")]
+script = ExtResource("5_d40jh")
+Parent = NodePath("../..")
+metadata/_custom_type_script = "uid://bnugdwfn1nybv"

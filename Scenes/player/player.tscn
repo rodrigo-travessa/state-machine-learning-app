@@ -5,9 +5,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kf5c0"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_eo61r")
-initial_state = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15625, 0.15625)

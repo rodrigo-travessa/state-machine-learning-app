@@ -1,5 +1,6 @@
 extends Node
 
+@export var Parent : CharacterBody2D
 @export var initial_state: State
 var current_state: State
 var states: Dictionary = {}
@@ -9,8 +10,7 @@ func _ready() -> void:
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.TransitionTo.connect(on_child_transition_to)
-			print(child.name)
-			
+			child.Parent = Parent
 	current_state = initial_state
 	current_state.Enter()
 
