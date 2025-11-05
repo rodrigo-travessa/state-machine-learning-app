@@ -3,6 +3,7 @@ class_name EnemyIdle
 
 @export var Parent: CharacterBody2D
 @export var move_speed: float = 10.0
+@onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
 
 var move_direction: Vector2
 var wander_time: float
@@ -13,6 +14,7 @@ func randomize_wander():
 	wander_time = randf_range(1,4)
 
 func Enter():
+	animation_player.play("run")
 	player = get_tree().get_first_node_in_group("player")
 	randomize_wander()
 
@@ -22,7 +24,7 @@ func Update(delta:float):
 	else:
 		randomize_wander()
 
-func Physics_Update(delta: float):
+func Update_Physics(delta: float):
 	var direction = player.global_position - Parent.global_position	
 	if direction.length() < 200:
 		TransitionTo.emit(self, "follow")

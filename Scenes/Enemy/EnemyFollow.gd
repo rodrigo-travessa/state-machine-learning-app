@@ -7,9 +7,10 @@ class_name EnemyFollow
 var player : CharacterBody2D
 
 func Enter():
+	Parent.play_animations("follow")
 	player = get_tree().get_first_node_in_group("player")
 
-func Physics_Update(delta: float):
+func Update_Physics(delta: float):
 	var direction = player.global_position - Parent.global_position
 	Parent.velocity = direction.normalized() * move_speed
 		

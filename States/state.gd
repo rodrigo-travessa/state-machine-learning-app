@@ -12,5 +12,5 @@ func Exit():
 func Update(delta: float):
 	pass
 
-func Physics_Update(delta: float):
+func Update_Physics(delta: float):
 	pass
