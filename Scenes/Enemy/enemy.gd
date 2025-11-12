@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name enemy
+class_name Enemy
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
