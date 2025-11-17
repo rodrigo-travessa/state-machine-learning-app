@@ -23,6 +23,6 @@ func _handle_hit(hitbox_component: HitboxComponent):
 
 func _on_area_entered(other_area: Area2D):
 	if other_area is not HitboxComponent:
-		return	
-	var hitbox_component: HitboxComponent = other_area	
+		return
+	var hitbox_component: HitboxComponent = other_area
 	_handle_hit.call_deferred(other_area)

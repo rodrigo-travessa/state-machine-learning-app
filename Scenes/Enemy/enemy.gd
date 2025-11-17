@@ -4,7 +4,7 @@ class_name Enemy
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-func _process(_delta: float) -> void:	
+func _process(_delta: float) -> void:
 	if velocity.x > 0:
 		sprite_2d.flip_h = false
 	else:

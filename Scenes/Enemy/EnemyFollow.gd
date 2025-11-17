@@ -13,6 +13,6 @@ func Enter():
 func Update_Physics(delta: float):
 	var direction = player.global_position - Parent.global_position
 	Parent.velocity = direction.normalized() * move_speed
-		
+
 	if direction.length() > 250:
 		TransitionTo.emit(self, "idle")

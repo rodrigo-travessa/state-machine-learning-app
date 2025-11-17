@@ -25,7 +25,7 @@ func Update(delta:float):
 		randomize_wander()
 
 func Update_Physics(delta: float):
-	var direction = player.global_position - Parent.global_position	
+	var direction = player.global_position - Parent.global_position
 	if direction.length() < 200:
 		TransitionTo.emit(self, "follow")
 		return
